@@ -3,6 +3,7 @@ using System.Text;
 using Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Models.DTO;
+using Services;
 
 namespace Backend.Controllers;
 
@@ -15,30 +16,19 @@ public class AuthController : ControllerBase
     {
         service = serv;
     }
-
+    
     [HttpPost("register")]
-    public IActionResult Register([FromBody] string s)
-    {
-        return Ok(new {A = "JWTTOKEN", B = "RefreshToken"});
-    }
-
-
-    [HttpPost("login")]
-    public IActionResult Login()
-    {
-        return Ok();
-    }
-
-    [HttpPost("refresh")]
-    public IActionResult Refresh()
-    {
-        return Ok();
-    }
-    [HttpPost("add")]
     public IActionResult Add([FromBody] UserDto user)
     {
         service.Add(user);
         return Ok();
+    }
+    [HttpPost("GetUser/{id}")]
+    public IActionResult Get([FromRoute]int id)
+    {
+        var serv = (UserService)service;
+        var s = serv.Get(id);
+        return Ok(s);
     }
 
 }

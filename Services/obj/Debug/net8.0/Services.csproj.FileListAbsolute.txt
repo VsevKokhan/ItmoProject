@@ -19,3 +19,4 @@ C:\Users\sevak\OneDrive\Рабочий стол\Pen\BackendServer\Services\obj\D
 C:\Users\sevak\OneDrive\Рабочий стол\Pen\BackendServer\Services\obj\Debug\net8.0\Services.pdb
 C:\Users\sevak\OneDrive\Рабочий стол\Pen\BackendServer\Services\obj\Debug\net8.0\Services.genruntimeconfig.cache
 C:\Users\sevak\OneDrive\Рабочий стол\Pen\BackendServer\Services\obj\Debug\net8.0\ref\Services.dll
+C:\Users\sevak\OneDrive\Рабочий стол\Pen\BackendServer\Services\obj\Debug\net8.0\Services.sourcelink.json

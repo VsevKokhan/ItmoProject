@@ -1,5 +1,6 @@
 ﻿using Data;
 using Interfaces;
+using Microsoft.AspNetCore.Mvc;
 using Models;
 using Models.DTO;
 using Models.Model;
@@ -31,5 +32,10 @@ public class UserService : IUserService
         var UserCourse = new User_Course(){Course_Id = courseIdFromQuery, User_Id = newUser.Id, Progress = 0};
         context.UserCourses.Add(UserCourse);
         context.SaveChanges();
+    }
+    
+    public UserEntity Get(int id)
+    {
+        return context.Users.First(x => x.Id == id);
     }
 }

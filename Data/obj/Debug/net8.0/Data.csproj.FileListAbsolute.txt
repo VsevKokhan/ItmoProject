@@ -15,3 +15,4 @@ C:\Users\sevak\OneDrive\Рабочий стол\Pen\BackendServer\Data\obj\Debug
 C:\Users\sevak\OneDrive\Рабочий стол\Pen\BackendServer\Data\obj\Debug\net8.0\Data.pdb
 C:\Users\sevak\OneDrive\Рабочий стол\Pen\BackendServer\Data\obj\Debug\net8.0\Data.genruntimeconfig.cache
 C:\Users\sevak\OneDrive\Рабочий стол\Pen\BackendServer\Data\obj\Debug\net8.0\ref\Data.dll
+C:\Users\sevak\OneDrive\Рабочий стол\Pen\BackendServer\Data\obj\Debug\net8.0\Data.sourcelink.json
