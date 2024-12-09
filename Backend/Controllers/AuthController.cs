@@ -12,9 +12,11 @@ namespace Backend.Controllers;
 public class AuthController : ControllerBase
 {
     private IUserService service;
-    public AuthController(IUserService serv)
+    private TokenService tokenService;
+    public AuthController(IUserService serv, TokenService tokenService)
     {
         service = serv;
+        this.tokenService = tokenService;
     }
     
     [HttpPost("register")]
@@ -23,12 +25,35 @@ public class AuthController : ControllerBase
         service.Add(user);
         return Ok();
     }
-    [HttpPost("GetUser/{id}")]
-    public IActionResult Get([FromRoute]int id)
+    [HttpPost("login")]
+    public IActionResult Login([FromBody] USser user)
     {
-        var serv = (UserService)service;
-        var s = serv.Get(id);
-        return Ok(s);
+        var servi = service as UserService;
+
+        var name = user.Name;
+        var pas = user.Pass;
+        var useri = servi.Get(pas, name);
+        var tok = tokenService.GenerateToken(useri.Id);
+
+        return Ok(tok);
+    }
+    [HttpPost("GetUserByToken")]
+    public IActionResult Get([FromBody] string token)
+    {
+        var servi = service as UserService;
+
+        var id = tokenService.GetIdFromToken(token);
+        
+
+        var user = servi.Get(int.Parse(id));
+
+        return Ok(user);
     }
 
+}
+
+public class USser
+{
+    public string Name { get; set; }
+    public string Pass { get; set; }
 }

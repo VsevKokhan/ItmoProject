@@ -13,3 +13,4 @@ C:\Users\sevak\OneDrive\Рабочий стол\Pen\BackendServer\Interfaces\obj
 C:\Users\sevak\OneDrive\Рабочий стол\Pen\BackendServer\Interfaces\obj\Debug\net8.0\refint\Interfaces.dll
 C:\Users\sevak\OneDrive\Рабочий стол\Pen\BackendServer\Interfaces\obj\Debug\net8.0\Interfaces.pdb
 C:\Users\sevak\OneDrive\Рабочий стол\Pen\BackendServer\Interfaces\obj\Debug\net8.0\ref\Interfaces.dll
+C:\Users\sevak\OneDrive\Рабочий стол\Pen\BackendServer\Interfaces\obj\Debug\net8.0\Interfaces.sourcelink.json

@@ -38,4 +38,8 @@ public class UserService : IUserService
     {
         return context.Users.First(x => x.Id == id);
     }
+    public UserEntity Get(string pas, string name)
+    {
+        return context.Users.First(x => x.Password_HK == pas && x.Name == name);
+    }
 }

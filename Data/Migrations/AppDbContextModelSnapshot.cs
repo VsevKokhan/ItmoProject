@@ -54,6 +54,32 @@ namespace Data.Migrations
                     b.ToTable("Courses");
                 });
 
+            modelBuilder.Entity("Models.Model.Module", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Course_Id")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Video_Link")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Course_Id");
+
+                    b.ToTable("Modules");
+                });
+
             modelBuilder.Entity("Models.Model.UserEntity", b =>
                 {
                     b.Property<int>("Id")
@@ -89,6 +115,26 @@ namespace Data.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("Models.Model.User_Modules", b =>
+                {
+                    b.Property<int>("User_Id")
+                        .HasColumnType("integer")
+                        .HasColumnOrder(0);
+
+                    b.Property<int>("Module_Id")
+                        .HasColumnType("integer")
+                        .HasColumnOrder(1);
+
+                    b.Property<bool>("Is_Passed")
+                        .HasColumnType("boolean");
+
+                    b.HasKey("User_Id", "Module_Id");
+
+                    b.HasIndex("Module_Id");
+
+                    b.ToTable("UserModules");
+                });
+
             modelBuilder.Entity("Models.User_Course", b =>
                 {
                     b.Property<int>("User_Id")
@@ -107,6 +153,36 @@ namespace Data.Migrations
                     b.HasIndex("Course_Id");
 
                     b.ToTable("UserCourses");
+                });
+
+            modelBuilder.Entity("Models.Model.Module", b =>
+                {
+                    b.HasOne("Models.Model.Course", "Course")
+                        .WithMany()
+                        .HasForeignKey("Course_Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+                });
+
+            modelBuilder.Entity("Models.Model.User_Modules", b =>
+                {
+                    b.HasOne("Models.Model.Module", "Course")
+                        .WithMany()
+                        .HasForeignKey("Module_Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Models.Model.UserEntity", "User")
+                        .WithMany()
+                        .HasForeignKey("User_Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Models.User_Course", b =>

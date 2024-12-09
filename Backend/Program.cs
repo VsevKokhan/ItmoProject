@@ -1,7 +1,10 @@
 
+using System.Text;
 using Data;
 using Interfaces;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Services;
 
 namespace Backend
@@ -13,6 +16,26 @@ namespace Backend
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddControllers();
+            var jwtSettings = builder.Configuration.GetSection("JWT");
+            string key = jwtSettings["Key"];
+            builder.Services.AddAuthentication(options =>
+                {
+                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                })
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = false,
+                        ValidateAudience = false,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = jwtSettings["Issuer"],
+                        ValidAudience = jwtSettings["Audience"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key))
+                    };
+                });
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
             
             builder.Services.AddDbContext<AppDbContext>(options =>
@@ -20,6 +43,8 @@ namespace Backend
             );
             builder.Services.AddScoped<AppDbContext>();
             builder.Services.AddScoped<IUserService, UserService>();
+            builder.Services.AddScoped<IModuleService, ModuleService>();
+            builder.Services.AddScoped<TokenService>();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
@@ -33,9 +58,9 @@ namespace Backend
 
             app.UseHttpsRedirection();
 
-            app.UseAuthorization();
-
-
+            app.UseAuthentication();
+            app.UseAuthorization(); 
+            
             app.MapControllers();
 
             app.Run();
