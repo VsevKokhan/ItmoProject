@@ -15,6 +15,4 @@ public class UserDto
     public string Itmo_Password { get; set; }
     [Required]
     public string Password_HK { get; set; }
-    [Required]
-    public string CourseType { get; set; }
 }

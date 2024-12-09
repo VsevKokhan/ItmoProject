@@ -28,9 +28,11 @@ public class UserService : IUserService
         };
         context.Users.Add(newUser);
         context.SaveChanges();
-        var courseIdFromQuery = context.Courses.First(x => x.Name == user.CourseType).Id;
-        var UserCourse = new User_Course(){Course_Id = courseIdFromQuery, User_Id = newUser.Id, Progress = 0};
-        context.UserCourses.Add(UserCourse);
+        foreach (var course in context.Courses.ToList())
+        {
+            var courseId = course.Id;
+            context.UserCourses.Add(new User_Course() {Course_Id = courseId, User_Id = newUser.Id, Progress = 0});
+        }
         context.SaveChanges();
     }
     

@@ -10,5 +10,4 @@ public class Course
     public string Mail { get; set; }
     public DateTime Duration { get; set; }
     public string Description { get; set; }
-    public string Link_For_Source { get; set; }
 }

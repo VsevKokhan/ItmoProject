@@ -37,10 +37,6 @@ namespace Data.Migrations
                     b.Property<DateTime>("Duration")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("Link_For_Source")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<string>("Mail")
                         .IsRequired()
                         .HasColumnType("text");
@@ -126,7 +122,9 @@ namespace Data.Migrations
                         .HasColumnOrder(1);
 
                     b.Property<bool>("Is_Passed")
-                        .HasColumnType("boolean");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(false);
 
                     b.HasKey("User_Id", "Module_Id");
 

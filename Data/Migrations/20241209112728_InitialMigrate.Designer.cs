@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241209091603_InitialMigrate")]
+    [Migration("20241209112728_InitialMigrate")]
     partial class InitialMigrate
     {
         /// <inheritdoc />
@@ -39,10 +39,6 @@ namespace Data.Migrations
 
                     b.Property<DateTime>("Duration")
                         .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Link_For_Source")
-                        .IsRequired()
-                        .HasColumnType("text");
 
                     b.Property<string>("Mail")
                         .IsRequired()
@@ -129,7 +125,9 @@ namespace Data.Migrations
                         .HasColumnOrder(1);
 
                     b.Property<bool>("Is_Passed")
-                        .HasColumnType("boolean");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(false);
 
                     b.HasKey("User_Id", "Module_Id");
 

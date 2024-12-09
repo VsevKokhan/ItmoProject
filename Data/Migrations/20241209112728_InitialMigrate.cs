@@ -21,8 +21,7 @@ namespace Data.Migrations
                     Name = table.Column<string>(type: "text", nullable: false),
                     Mail = table.Column<string>(type: "text", nullable: false),
                     Duration = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    Description = table.Column<string>(type: "text", nullable: false),
-                    Link_For_Source = table.Column<string>(type: "text", nullable: false)
+                    Description = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -99,7 +98,7 @@ namespace Data.Migrations
                 {
                     User_Id = table.Column<int>(type: "integer", nullable: false),
                     Module_Id = table.Column<int>(type: "integer", nullable: false),
-                    Is_Passed = table.Column<bool>(type: "boolean", nullable: false)
+                    Is_Passed = table.Column<bool>(type: "boolean", nullable: false, defaultValue: false)
                 },
                 constraints: table =>
                 {

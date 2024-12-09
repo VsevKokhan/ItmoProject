@@ -22,5 +22,7 @@ public class AppDbContext : DbContext
             .HasKey(uc => new { uc.User_Id, uc.Course_Id });
         modelBuilder.Entity<User_Modules>()
             .HasKey(um => new { um.User_Id, um.Module_Id });
+        modelBuilder.Entity<User_Modules>()
+            .Property(um => um.Is_Passed).HasDefaultValue(false);
     }
 }

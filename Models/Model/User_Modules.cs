@@ -11,7 +11,6 @@ public class User_Modules
 
     [Key, Column(Order = 1)]
     public int Module_Id { get; set; }
-    [DefaultValue(false)]
     public bool Is_Passed { get; set; }
     [ForeignKey(nameof(User_Id))]
     public UserEntity User { get; set; }

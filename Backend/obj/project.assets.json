@@ -4744,23 +4744,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\sevak\\.nuget\\packages\\": {},
+    "C:\\Users\\Михаил\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\sevak\\OneDrive\\Рабочий стол\\Pen\\BackendServer\\Backend\\Backend.csproj",
+      "projectUniqueName": "C:\\Users\\Михаил\\Desktop\\папка\\ItmoProject\\Backend\\Backend.csproj",
       "projectName": "Backend",
-      "projectPath": "C:\\Users\\sevak\\OneDrive\\Рабочий стол\\Pen\\BackendServer\\Backend\\Backend.csproj",
-      "packagesPath": "C:\\Users\\sevak\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\sevak\\OneDrive\\Рабочий стол\\Pen\\BackendServer\\Backend\\obj\\",
+      "projectPath": "C:\\Users\\Михаил\\Desktop\\папка\\ItmoProject\\Backend\\Backend.csproj",
+      "packagesPath": "C:\\Users\\Михаил\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Михаил\\Desktop\\папка\\ItmoProject\\Backend\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\sevak\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Михаил\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -4776,14 +4776,14 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\sevak\\OneDrive\\Рабочий стол\\Pen\\BackendServer\\Data\\Data.csproj": {
-              "projectPath": "C:\\Users\\sevak\\OneDrive\\Рабочий стол\\Pen\\BackendServer\\Data\\Data.csproj"
+            "C:\\Users\\Михаил\\Desktop\\папка\\ItmoProject\\Data\\Data.csproj": {
+              "projectPath": "C:\\Users\\Михаил\\Desktop\\папка\\ItmoProject\\Data\\Data.csproj"
             },
-            "C:\\Users\\sevak\\OneDrive\\Рабочий стол\\Pen\\BackendServer\\Interfaces\\Interfaces.csproj": {
-              "projectPath": "C:\\Users\\sevak\\OneDrive\\Рабочий стол\\Pen\\BackendServer\\Interfaces\\Interfaces.csproj"
+            "C:\\Users\\Михаил\\Desktop\\папка\\ItmoProject\\Interfaces\\Interfaces.csproj": {
+              "projectPath": "C:\\Users\\Михаил\\Desktop\\папка\\ItmoProject\\Interfaces\\Interfaces.csproj"
             },
-            "C:\\Users\\sevak\\OneDrive\\Рабочий стол\\Pen\\BackendServer\\Services\\Services.csproj": {
-              "projectPath": "C:\\Users\\sevak\\OneDrive\\Рабочий стол\\Pen\\BackendServer\\Services\\Services.csproj"
+            "C:\\Users\\Михаил\\Desktop\\папка\\ItmoProject\\Services\\Services.csproj": {
+              "projectPath": "C:\\Users\\Михаил\\Desktop\\папка\\ItmoProject\\Services\\Services.csproj"
             }
           }
         }
@@ -4849,7 +4849,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.301/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
