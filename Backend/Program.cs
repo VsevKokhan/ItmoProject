@@ -45,6 +45,7 @@ namespace Backend
             builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddScoped<IModuleService, ModuleService>();
             builder.Services.AddScoped<TokenService>();
+            builder.Services.AddScoped<CourseService>();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
