@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 using System.Text;
 using Interfaces;
@@ -20,10 +21,19 @@ public class AuthController : ControllerBase
     }
     
     [HttpPost("register")]
-    public IActionResult Add([FromBody] UserDto user)
+    public IActionResult Register([FromBody] UserDto user)
     {
+        
         service.Add(user);
-        return Ok();
+        
+        var servi = service as UserService;
+
+        var name = user.Name;
+        var pas = user.Password_HK;
+        var useri = servi.Get(pas, name);
+        var token = tokenService.GenerateToken(useri.Id);
+
+        return Ok(token);
     }
     [HttpPost("login")]
     public IActionResult Login([FromBody] USser user)
@@ -54,6 +64,8 @@ public class AuthController : ControllerBase
 
 public class USser
 {
+    [Required]
     public string Name { get; set; }
+    [Required]
     public string Pass { get; set; }
 }
