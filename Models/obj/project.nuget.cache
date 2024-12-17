@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "29YIEM41p1E=",
+  "dgSpecHash": "OdkOVGCRaU4=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Михаил\\Desktop\\папка\\ItmoProject\\Models\\Models.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\sevak\\OneDrive\\Рабочий стол\\Pen\\ItmoProject\\Models\\Models.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\sevak\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512"
+  ],
   "logs": []
 }

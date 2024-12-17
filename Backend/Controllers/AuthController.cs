@@ -20,7 +20,7 @@ public class AuthController : ControllerBase
         this.tokenService = tokenService;
     }
     
-    [HttpPost("register")]
+    [HttpPost("Register")]
     public IActionResult Register([FromBody] UserDto user)
     {
         
@@ -35,7 +35,7 @@ public class AuthController : ControllerBase
 
         return Ok(token);
     }
-    [HttpPost("login")]
+    [HttpPost("Login")]
     public IActionResult Login([FromBody] USser user)
     {
         var servi = service as UserService;

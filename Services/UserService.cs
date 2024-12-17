@@ -33,6 +33,11 @@ public class UserService : IUserService
             var courseId = course.Id;
             context.UserCourses.Add(new User_Course() {Course_Id = courseId, User_Id = newUser.Id, Progress = 0});
         }
+        foreach (var module in context.Modules)
+        {
+            var moduleId = module.Id;
+            context.UserModules.Add(new User_Modules() {Module_Id = moduleId, User_Id = newUser.Id});
+        }
         context.SaveChanges();
     }
     
