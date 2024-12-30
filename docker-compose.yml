@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: postgres-container
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: mydb
+    #ports:
+     # - "5433:5432"
+    volumes:
+      - ./datapostgre:/var/lib/postgresql/data
+    networks:
+      - my_network  # Указываем, что сервис подключается к сети my_network
+
+  webapp:
+    build:
+      context: .  # Контекст сборки (корневая папка проекта, где находится Dockerfile)
+      dockerfile: DockerfileBackend  # Путь к Dockerfile, если он называется иначе
+    container_name: webapp-container
+    restart: always
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"  # Можно изменить на "Production", если нужно
+    ports:
+      - "7094:7094"  # Проброс порта 7094 с хоста на порт 7094 внутри контейнера
+    depends_on:
+      - postgres  # Указывает, что контейнер webapp зависит от контейнера postgres
+    networks:
+      - my_network  # Указываем, что сервис подключается к сети my_network
+
+networks:
+  my_network:
+    driver: bridge  # По умолчанию используется bridge драйвер для локальных сетей

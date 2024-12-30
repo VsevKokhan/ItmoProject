@@ -1,4 +1,3 @@
-
 using System.Text;
 using Data;
 using Interfaces;
@@ -15,7 +14,10 @@ namespace Backend
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            // Добавление необходимых сервисов
             builder.Services.AddControllers();
+            
+            // Настройка JWT аутентификации
             var jwtSettings = builder.Configuration.GetSection("JWT");
             string key = jwtSettings["Key"];
             builder.Services.AddAuthentication(options =>
@@ -36,34 +38,44 @@ namespace Backend
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key))
                     };
                 });
+
+            // Настройка подключения к базе данных
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-            
             builder.Services.AddDbContext<AppDbContext>(options =>
-                    options.UseNpgsql(connectionString) 
-            );
+                    options.UseNpgsql(connectionString));
+
+            // Добавление сервисов
             builder.Services.AddScoped<AppDbContext>();
             builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddScoped<IModuleService, ModuleService>();
             builder.Services.AddScoped<TokenService>();
             builder.Services.AddScoped<CourseService>();
+
+            // Добавление Swagger (для разработки)
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
 
+            // Настройка Swagger в режиме разработки
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
 
+            // HTTPS редирект и аутентификация
             app.UseHttpsRedirection();
-
             app.UseAuthentication();
-            app.UseAuthorization(); 
-            
+            app.UseAuthorization();
+
+            // Маппинг контроллеров
             app.MapControllers();
 
+            // Настройка прослушивания на порту 5000 (Kestrel)
+            //app.Run("http://*:5000"); // Простой способ указать порт для прослушивания
+
+            // Запуск приложения
             app.Run();
         }
     }

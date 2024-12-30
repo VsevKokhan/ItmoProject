@@ -1,0 +1,21 @@
+# Исключаем папки, содержащие скомпилированные файлы
+bin/
+obj/
+Readme
+# Исключаем файлы, относящиеся к версии и конфигурации IDE
+*.user
+*.suo
+*.vs/
+*.idea/
+# Исключаем Dockerfile
+DockerfileBackend
+
+# Исключаем docker-compose.yml
+docker-compose.yml
+# Исключаем папку с git репозиторием
+.git/
+.gitignore
+
+# Исключаем временные файлы системы
+*.tmp
+
