@@ -50,13 +50,13 @@ namespace Backend
             builder.Services.AddScoped<IModuleService, ModuleService>();
             builder.Services.AddScoped<TokenService>();
             builder.Services.AddScoped<CourseService>();
-
+            
             // Добавление Swagger (для разработки)
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
-
+            
             // Настройка Swagger в режиме разработки
             if (app.Environment.IsDevelopment())
             {
@@ -64,8 +64,6 @@ namespace Backend
                 app.UseSwaggerUI();
             }
 
-            // HTTPS редирект и аутентификация
-            app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseAuthorization();
 
@@ -73,7 +71,7 @@ namespace Backend
             app.MapControllers();
 
             // Настройка прослушивания на порту 5000 (Kestrel)
-            //app.Run("http://*:5000"); // Простой способ указать порт для прослушивания
+            app.Run("http://*:5000"); 
 
             // Запуск приложения
             app.Run();

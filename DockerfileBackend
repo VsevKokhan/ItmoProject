@@ -1,9 +1,7 @@
-
 # Базовый образ для выполнения приложения
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 WORKDIR /app
-EXPOSE 7094
-
+EXPOSE 5000
 
 # Образ для сборки
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
@@ -16,6 +14,7 @@ COPY Data/Data.csproj Data/
 COPY Interfaces/Interfaces.csproj Interfaces/
 COPY Services/Services.csproj Services/
 COPY Models/Models.csproj Models/
+
 # Восстанавливаем зависимости
 RUN dotnet restore BackendServer.sln
 
@@ -24,16 +23,18 @@ COPY . .
 
 # Сборка основного проекта
 WORKDIR /src/Backend
-RUN dotnet build Backend.csproj -c Release -o /app
+RUN dotnet build Backend.csproj -c Release -o /app --no-restore
 
 # Публикация основного проекта
 FROM build AS publish
-RUN dotnet publish Backend.csproj -c Release -o /app
+RUN dotnet publish Backend.csproj -c Release -o /app --no-restore
 
 # Финальный образ
 FROM base AS final
 WORKDIR /app
+
+# Копируем приложение из образа publish
 COPY --from=publish /app .
 
-# Точка входа
+# Устанавливаем точку входа
 ENTRYPOINT ["dotnet", "Backend.dll"]
