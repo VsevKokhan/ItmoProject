@@ -23,11 +23,11 @@ COPY . .
 
 # Сборка основного проекта
 WORKDIR /src/Backend
-RUN dotnet build Backend.csproj -c Release -o /app --no-restore
+RUN dotnet build Backend.csproj -c Release -o /app
 
 # Публикация основного проекта
 FROM build AS publish
-RUN dotnet publish Backend.csproj -c Release -o /app --no-restore
+RUN dotnet publish Backend.csproj -c Release -o /app
 
 # Финальный образ
 FROM base AS final

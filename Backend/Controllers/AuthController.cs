@@ -23,20 +23,17 @@ public class AuthController : ControllerBase
     [HttpPost("Register")]
     public IActionResult Register([FromBody] UserDto user)
     {
-        
         service.Add(user);
         
-        var servi = service as UserService;
-
         var name = user.Name;
         var pas = user.Password_HK;
-        var useri = servi.Get(pas, name);
+        var useri = service.Get(pas, name);
         var token = tokenService.GenerateToken(useri.Id);
 
         return Ok(token);
     }
     [HttpPost("Login")]
-    public IActionResult Login([FromBody] USser user)
+    public IActionResult Login([FromBody] UserForLogin user)
     {
         var servi = service as UserService;
 
@@ -60,12 +57,4 @@ public class AuthController : ControllerBase
         return Ok(user);
     }
 
-}
-
-public class USser
-{
-    [Required]
-    public string Name { get; set; }
-    [Required]
-    public string Pass { get; set; }
 }

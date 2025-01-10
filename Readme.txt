@@ -1,4 +1,3 @@
-set search_path to itmo;
 INSERT INTO "Courses" ("Name", "Mail", "Duration", "Description")
 VALUES
 ('Python', 'test@example.com', '2024-12-06 12:00:00+00', 'A sample course for testing.');

@@ -56,23 +56,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\sevak\\.nuget\\packages\\": {},
+    "C:\\Users\\Михаил\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\sevak\\OneDrive\\Рабочий стол\\Pen\\ItmoProject\\Models\\Models.csproj",
+      "projectUniqueName": "C:\\TZ\\Новая папка\\ItmoProject\\Models\\Models.csproj",
       "projectName": "Models",
-      "projectPath": "C:\\Users\\sevak\\OneDrive\\Рабочий стол\\Pen\\ItmoProject\\Models\\Models.csproj",
-      "packagesPath": "C:\\Users\\sevak\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\sevak\\OneDrive\\Рабочий стол\\Pen\\ItmoProject\\Models\\obj\\",
+      "projectPath": "C:\\TZ\\Новая папка\\ItmoProject\\Models\\Models.csproj",
+      "packagesPath": "C:\\Users\\Михаил\\.nuget\\packages\\",
+      "outputPath": "C:\\TZ\\Новая папка\\ItmoProject\\Models\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\sevak\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Михаил\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -126,7 +126,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.301/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
