@@ -1,6 +1,3 @@
-using System.ComponentModel.DataAnnotations;
-using System.Security.Claims;
-using System.Text;
 using Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Models.DTO;
@@ -23,36 +20,28 @@ public class AuthController : ControllerBase
     [HttpPost("Register")]
     public IActionResult Register([FromBody] UserDto user)
     {
-        service.Add(user);
+        var newUser = service.Add(user);
         
-        var name = user.Name;
-        var pas = user.Password_HK;
-        var useri = service.Get(pas, name);
-        var token = tokenService.GenerateToken(useri.Id);
+        var token = tokenService.GenerateToken(newUser.Id);
 
         return Ok(token);
     }
     [HttpPost("Login")]
     public IActionResult Login([FromBody] UserForLogin user)
     {
-        var servi = service as UserService;
-
         var name = user.Name;
         var pas = user.Pass;
-        var useri = servi.Get(pas, name);
-        var tok = tokenService.GenerateToken(useri.Id);
+        var userEntity = service.Get(pas, name);
+        var tok = tokenService.GenerateToken(userEntity.Id);
 
         return Ok(tok);
     }
     [HttpPost("GetUserByToken")]
     public IActionResult Get([FromBody] string token)
     {
-        var servi = service as UserService;
-
         var id = tokenService.GetIdFromToken(token);
         
-
-        var user = servi.Get(int.Parse(id));
+        var user = service.Get(id);
 
         return Ok(user);
     }

@@ -15,7 +15,7 @@ public class UserService : IUserService
     {
         this.context = context;
     }
-    public void Add(UserDto user)
+    public UserEntity Add(UserDto user)
     {
         var newUser = new UserEntity
         {
@@ -39,6 +39,7 @@ public class UserService : IUserService
             context.UserModules.Add(new User_Modules() {Module_Id = moduleId, User_Id = newUser.Id});
         }
         context.SaveChanges();
+        return newUser;
     }
     
     public UserEntity Get(int id)

@@ -74,13 +74,12 @@ public class TokenService
     public string GenerateNewAccessToken(string refreshToken)
     {
         var id = GetIdFromToken(refreshToken);
-        return GenerateToken(int.Parse(id));
+        return GenerateToken(id);
     }
     public ClaimsPrincipal ValidateToken(string token)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
-        var key = Encoding.UTF8.GetBytes(_key);
-
+        var key = Encoding.UTF8.GetBytes(_key); 
         try
         {
             var parameters = new TokenValidationParameters
@@ -103,10 +102,10 @@ public class TokenService
             return null; // Если токен недействителен
         }
     }
-    public string GetIdFromToken(string token)
+    public int GetIdFromToken(string token)
     {
         var principal = ValidateToken(token);
-        return principal?.FindFirstValue("id");
+        return int.Parse(principal?.FindFirstValue("id"));
     }
 
 }
