@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "yil/cB6iDho=",
+  "dgSpecHash": "ApP+O1oaAko=",
   "success": true,
-  "projectFilePath": "C:\\TZ\\Новая папка\\ItmoProject\\Interfaces\\Interfaces.csproj",
+  "projectFilePath": "C:\\Users\\sevak\\OneDrive\\Рабочий стол\\Pen\\ItmoProject\\Interfaces\\Interfaces.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Михаил\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512"
+    "C:\\Users\\sevak\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512"
   ],
   "logs": []
 }

@@ -680,3 +680,5 @@ C:\TZ\Новая папка\ItmoProject\Backend\obj\Debug\net8.0\Backend.pdb
 C:\TZ\Новая папка\ItmoProject\Backend\obj\Debug\net8.0\Backend.genruntimeconfig.cache
 C:\TZ\Новая папка\ItmoProject\Backend\obj\Debug\net8.0\ref\Backend.dll
 C:\Users\sevak\OneDrive\Рабочий стол\Pen\ItmoProject\Backend\bin\Debug\net8.0\BCrypt.Net-Next.dll
+C:\Users\sevak\OneDrive\Рабочий стол\Pen\ItmoProject\Backend\bin\Debug\net8.0\Pipelines.Sockets.Unofficial.dll
+C:\Users\sevak\OneDrive\Рабочий стол\Pen\ItmoProject\Backend\bin\Debug\net8.0\StackExchange.Redis.dll

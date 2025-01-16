@@ -2,8 +2,10 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using StackExchange.Redis;
 
 namespace Services;
 
@@ -14,6 +16,7 @@ public class TokenService
     private readonly string _audience;
     private readonly int _accessTokenLifetime;
     private readonly int _accessRefreshTokenLifetime;
+    private readonly IDatabase _redis;
     
     public TokenService(IConfiguration configuration)
     {
@@ -23,11 +26,10 @@ public class TokenService
         _audience = jwtSettings["Audience"];
         _accessTokenLifetime = int.Parse(jwtSettings["AccessTokenLifetime"]);
         
-        _accessRefreshTokenLifetime = int.Parse(jwtSettings["AccessTokenLifetime"]);
+        _accessRefreshTokenLifetime = int.Parse(jwtSettings["RefreshTokenLifetime"]);
     }
-    public string GenerateToken(int id)
+    public string GenerateAccessToken(int id)
     {
-        // Создаём список claims с логином и паролем
         var claims = new[]
         {
             new Claim("id", id.ToString())
@@ -70,13 +72,15 @@ public class TokenService
         // Возвращаем сгенерированный токен
         return new JwtSecurityTokenHandler().WriteToken(token);
     }
-
-    public string GenerateNewAccessToken(string refreshToken)
+    
+    public (string accessToken, string refreshToken) GetNewTokensFromRefreshToken(string refreshToken)
     {
-        var id = GetIdFromToken(refreshToken);
-        return GenerateToken(id);
+        var refreshTokenId = GetIdFromToken(refreshToken);
+        return (GenerateAccessToken(refreshTokenId),
+            GenerateRefreshToken(refreshTokenId));
+
     }
-    public ClaimsPrincipal ValidateToken(string token)
+    public ClaimsPrincipal? ValidateToken(string token)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
         var key = Encoding.UTF8.GetBytes(_key); 
@@ -105,7 +109,8 @@ public class TokenService
     public int GetIdFromToken(string token)
     {
         var principal = ValidateToken(token);
-        return int.Parse(principal?.FindFirstValue("id"));
+        return int.Parse(principal?.FindFirstValue("id") ?? throw new Exception("token is not valid"));
     }
-
+    
+    
 }

@@ -29,8 +29,8 @@ namespace Backend
                 {
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
-                        ValidateIssuer = false,
-                        ValidateAudience = false,
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
                         ValidateLifetime = true,
                         ValidateIssuerSigningKey = true,
                         ValidIssuer = jwtSettings["Issuer"],
@@ -71,7 +71,7 @@ namespace Backend
             app.MapControllers();
 
             // Настройка прослушивания на порту 5000 (Kestrel)
-            app.Run("http://*:5000"); 
+            //app.Run("http://*:5000"); 
 
             // Запуск приложения
             app.Run();

@@ -11,9 +11,9 @@ public class AuthController : ControllerBase
 {
     private IUserService service;
     private TokenService tokenService;
-    public AuthController(IUserService serv, TokenService tokenService)
+    public AuthController(IUserService service, TokenService tokenService)
     {
-        service = serv;
+        this.service = service;
         this.tokenService = tokenService;
     }
     
@@ -22,9 +22,10 @@ public class AuthController : ControllerBase
     {
         var newUser = service.Add(user);
         
-        var token = tokenService.GenerateToken(newUser.Id);
+        var token = tokenService.GenerateAccessToken(newUser.Id);
+        var refreshtoken = tokenService.GenerateRefreshToken(newUser.Id);
 
-        return Ok(token);
+        return Ok(new {AccessToken = token, RefreshToken = refreshtoken});
     }
     [HttpPost("Login")]
     public IActionResult Login([FromBody] UserForLogin user)
@@ -32,18 +33,24 @@ public class AuthController : ControllerBase
         var name = user.Name;
         var pas = user.Pass;
         var userEntity = service.Get(pas, name);
-        var tok = tokenService.GenerateToken(userEntity.Id);
-
-        return Ok(tok);
+        
+        var token = tokenService.GenerateAccessToken(userEntity.Id);
+        var refreshtoken = tokenService.GenerateRefreshToken(userEntity.Id);
+        return Ok(new {AccessToken = token, RefreshToken = refreshtoken});
     }
     [HttpPost("GetUserByToken")]
     public IActionResult Get([FromBody] string token)
     {
         var id = tokenService.GetIdFromToken(token);
-        
         var user = service.Get(id);
 
         return Ok(user);
+    }
+    [HttpPost("refresh")]
+    public IActionResult Refresh([FromBody] string refreshToken)
+    {
+        var newTokens = tokenService.GetNewTokensFromRefreshToken(refreshToken);
+        return Ok(new{NewAccessToken = newTokens.accessToken, newRefreshToken = newTokens.refreshToken});
     }
 
 }
