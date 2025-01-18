@@ -4,6 +4,6 @@ namespace Interfaces;
 
 public interface IModuleService
 {
-    public Module Get(string nameOfModule);
-    public IEnumerable<Module> GetModulesOfCourse(string nameOfCourse);
+    public Task<Module?> GetModule(string nameOfModule);
+    public Task<bool> MakeModuleCompleted(int idModule, int idUser);
 }

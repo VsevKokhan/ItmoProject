@@ -1,4 +1,5 @@
 using Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services;
 
@@ -14,12 +15,22 @@ public class CourseController : ControllerBase
         this.courseService = moduleService;
     }
     
-    [HttpPost("GetCourses")]
+    [Authorize]
+    [HttpGet("GetCourses")]
     public IActionResult Get()
     {
-        var s = courseService.GetCourses();
+        var courses = courseService.GetCourses();
         
-        return Ok(s);
+        return Ok(courses);
     }
+    [Authorize]
+    [HttpGet("GetModulesOfCourse")]
+    public IActionResult GetModulesOfCourse(string nameOfCourse)
+    {
+        var modules = courseService.GetModulesOfCourse(nameOfCourse);
+        
+        return Ok(modules);
+    }
+
 
 }

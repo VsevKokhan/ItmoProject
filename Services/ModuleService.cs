@@ -12,13 +12,22 @@ public class ModuleService : IModuleService
     {
         this.context = context;
     }
-    public Module Get(string nameOfModule)
+
+    public async Task<Module?> GetModule(string nameOfModule)
     {
-        return context.Modules.AsNoTracking().First(m => m.Name == nameOfModule);
+        return await context.Modules.AsNoTracking().FirstOrDefaultAsync(m => m.Name == nameOfModule);
     }
 
-    public IEnumerable<Module> GetModulesOfCourse(string nameOfCourse)
+    public async Task<bool> MakeModuleCompleted(int idModule, int idUser)
     {
-        return context.Modules.AsNoTracking().Include(m => m.Course).Where(m => m.Course.Name == nameOfCourse);
+        var um = await context.UserModules.FirstOrDefaultAsync(um => um.User_Id == idUser && um.Module_Id == idModule);
+        if (um == null)
+        {
+            return false;
+        }
+        um.Is_Passed = true;
+
+        await context.SaveChangesAsync();
+        return true;
     }
 }

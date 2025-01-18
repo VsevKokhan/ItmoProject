@@ -35,9 +35,23 @@ namespace Backend
                         ValidateIssuerSigningKey = true,
                         ValidIssuer = jwtSettings["Issuer"],
                         ValidAudience = jwtSettings["Audience"],
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key))
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key)),
+                        ClockSkew = TimeSpan.Zero // Убираем временную погрешность
+                    };
+
+                    // Обработка событий аутентификации
+                    options.Events = new JwtBearerEvents
+                    {
+                        // Обрабатываем вызовы, если токен отсутствует или недействителен
+                        OnChallenge = context =>
+                        {
+                            context.Response.Redirect("https://localhost:7094/api/Auth/Refresh"); // Перенаправление при отсутствии токена
+                            context.HandleResponse(); // Предотвращаем стандартный ответ
+                            return Task.CompletedTask;
+                        }
                     };
                 });
+            
 
             // Настройка подключения к базе данных
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");

@@ -37,10 +37,6 @@ namespace Data.Migrations
                     b.Property<DateTime>("Duration")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("Mail")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");

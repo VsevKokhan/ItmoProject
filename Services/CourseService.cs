@@ -11,9 +11,13 @@ public class CourseService
     {
         this.context = context;
     }
-    public IEnumerable<string> GetCourses()
+    public IEnumerable<Course> GetCourses()
     {
-        return context.Courses.AsNoTracking().Select(c => c.Name);
+        return context.Courses.AsNoTracking();
+    }
+    public IEnumerable<Module> GetModulesOfCourse(string nameOfCourse)
+    {
+        return context.Modules.AsNoTracking().Where(m => m.Course.Name == nameOfCourse);
     }
 
 }

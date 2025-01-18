@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Controllers;
@@ -7,12 +8,13 @@ namespace Backend.Controllers;
 public class VideoController : ControllerBase
 {
     
-     [HttpGet("Video/{video}")]
+    [Authorize] 
+    [HttpGet("{video}")]
      public IActionResult GetVideo([FromRoute] string video)
      {
-         //var firstPath = @"C:\Users\sevak\OneDrive\Рабочий стол\Pen\";
-         //var filePath = @$"{firstPath}ItmoProject\videos\{video}.mp4";
-         var filePath = Path.Combine(AppContext.BaseDirectory, "videos", $"{video}.mp4");
+         var firstPath = @"C:\Users\sevak\OneDrive\Рабочий стол\Pen\";
+         var filePath = @$"{firstPath}ItmoProject\videos\{video}.mp4";
+         //var filePath = Path.Combine(AppContext.BaseDirectory, "videos", $"{video}.mp4");
          var fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
          return File(fileStream, "video/mp4", "video.mp4");
      }

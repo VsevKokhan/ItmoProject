@@ -25,7 +25,6 @@ public class TokenService
         _issuer = jwtSettings["Issuer"];
         _audience = jwtSettings["Audience"];
         _accessTokenLifetime = int.Parse(jwtSettings["AccessTokenLifetime"]);
-        
         _accessRefreshTokenLifetime = int.Parse(jwtSettings["RefreshTokenLifetime"]);
     }
     public string GenerateAccessToken(int id)
@@ -72,45 +71,42 @@ public class TokenService
         // Возвращаем сгенерированный токен
         return new JwtSecurityTokenHandler().WriteToken(token);
     }
-    
-    public (string accessToken, string refreshToken) GetNewTokensFromRefreshToken(string refreshToken)
-    {
-        var refreshTokenId = GetIdFromToken(refreshToken);
-        return (GenerateAccessToken(refreshTokenId),
-            GenerateRefreshToken(refreshTokenId));
 
-    }
-    public ClaimsPrincipal? ValidateToken(string token)
+    public ClaimsPrincipal? ValidateRefreshToken(string token)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
-        var key = Encoding.UTF8.GetBytes(_key); 
+        var key = Encoding.UTF8.GetBytes(_key);
+
         try
         {
-            var parameters = new TokenValidationParameters
+            var validationParameters = new TokenValidationParameters
             {
                 ValidateIssuer = true,
                 ValidateAudience = true,
+                ValidateLifetime = true,
                 ValidateIssuerSigningKey = true,
                 ValidIssuer = _issuer,
                 ValidAudience = _audience,
                 IssuerSigningKey = new SymmetricSecurityKey(key),
-                ValidateLifetime = true
+                ClockSkew = TimeSpan.Zero // Убираем временной сдвиг для более строгой проверки
             };
 
-            // Валидируем токен и извлекаем ClaimsPrincipal
-            var principal = tokenHandler.ValidateToken(token, parameters, out _);
+            // Валидируем токен и возвращаем ClaimsPrincipal
+            var principal = tokenHandler.ValidateToken(token, validationParameters, out _);
             return principal;
         }
-        catch (Exception)
+        catch (SecurityTokenException ex)
         {
-            return null; // Если токен недействителен
+            // Токен недействителен
+            Console.WriteLine($"Token validation failed: {ex.Message}");
+            return null;
+        }
+        catch (Exception ex)
+        {
+            // Обрабатываем другие исключения
+            Console.WriteLine($"An error occurred: {ex.Message}");
+            return null;
         }
     }
-    public int GetIdFromToken(string token)
-    {
-        var principal = ValidateToken(token);
-        return int.Parse(principal?.FindFirstValue("id") ?? throw new Exception("token is not valid"));
-    }
-    
     
 }
