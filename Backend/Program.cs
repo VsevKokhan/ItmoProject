@@ -45,7 +45,7 @@ namespace Backend
                         // Обрабатываем вызовы, если токен отсутствует или недействителен
                         OnChallenge = context =>
                         {
-                            context.Response.Redirect("https://localhost:7094/api/Auth/Refresh"); // Перенаправление при отсутствии токена
+                            context.Response.Redirect("https://localhost:443/api/Auth/Refresh"); // Перенаправление при отсутствии токена
                             context.HandleResponse(); // Предотвращаем стандартный ответ
                             return Task.CompletedTask;
                         }
@@ -85,7 +85,7 @@ namespace Backend
             app.MapControllers();
 
             // Настройка прослушивания на порту 5000 (Kestrel)
-            //app.Run("http://*:5000"); 
+            app.Run("http://*:5000"); 
 
             // Запуск приложения
             app.Run();

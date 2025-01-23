@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Data.Migrations
 {
     /// <inheritdoc />
-    public partial class MigrationName : Migration
+    public partial class InitialMigrate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -19,7 +19,6 @@ namespace Data.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "text", nullable: false),
-                    Mail = table.Column<string>(type: "text", nullable: false),
                     Duration = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false)
                 },
@@ -36,8 +35,6 @@ namespace Data.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "text", nullable: false),
                     Mail = table.Column<string>(type: "text", nullable: false),
-                    Itmo_Id = table.Column<long>(type: "bigint", nullable: false),
-                    Itmo_Password = table.Column<string>(type: "text", nullable: false),
                     Password_HK = table.Column<string>(type: "text", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
@@ -73,7 +70,7 @@ namespace Data.Migrations
                 {
                     User_Id = table.Column<int>(type: "integer", nullable: false),
                     Course_Id = table.Column<int>(type: "integer", nullable: false),
-                    Progress = table.Column<int>(type: "integer", nullable: false)
+                    Progress = table.Column<int>(type: "integer", nullable: false, defaultValue: 0)
                 },
                 constraints: table =>
                 {
@@ -131,6 +128,12 @@ namespace Data.Migrations
                 name: "IX_UserModules_Module_Id",
                 table: "UserModules",
                 column: "Module_Id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_Mail",
+                table: "Users",
+                column: "Mail",
+                unique: true);
         }
 
         /// <inheritdoc />

@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250118152558_InitialMyMigrate")]
-    partial class InitialMyMigrate
+    [Migration("20250123195453_InitialMigrate")]
+    partial class InitialMigrate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -86,13 +86,6 @@ namespace Data.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<long>("Itmo_Id")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Itmo_Password")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<string>("Mail")
                         .IsRequired()
                         .HasColumnType("text");
@@ -106,6 +99,9 @@ namespace Data.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Mail")
+                        .IsUnique();
 
                     b.ToTable("Users");
                 });
@@ -143,7 +139,9 @@ namespace Data.Migrations
                         .HasColumnOrder(1);
 
                     b.Property<int>("Progress")
-                        .HasColumnType("integer");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasDefaultValue(0);
 
                     b.HasKey("User_Id", "Course_Id");
 

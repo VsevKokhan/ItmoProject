@@ -44,10 +44,13 @@ public class AuthController : ControllerBase
     [HttpPost("Login")]
     public IActionResult Login([FromBody] UserForLogin user)
     {
-        var name = user.Name;
+        var mail = user.Mail;
         var pas = user.Pass;
-        var userEntity = userService.Get(pas, name);
-        
+        var userEntity = userService.Get(pas, mail);
+        if (userEntity == null)
+        {
+            return BadRequest("User is not exist");
+        }
         var accessToken = tokenService.GenerateAccessToken(userEntity.Id);
         var refreshToken = tokenService.GenerateRefreshToken(userEntity.Id);
         Response.Cookies.Append("RefreshToken", refreshToken, new CookieOptions

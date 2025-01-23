@@ -23,7 +23,10 @@ public class AppDbContext : DbContext
             .HasKey(um => new { um.User_Id, um.Module_Id });
         modelBuilder.Entity<User_Modules>()
             .Property(um => um.Is_Passed).HasDefaultValue(false);
-
-
+        modelBuilder.Entity<User_Course>()
+            .Property(um => um.Progress).HasDefaultValue(0);
+        modelBuilder.Entity<UserEntity>()
+            .HasIndex(e => e.Mail)
+            .IsUnique();
     }
 }

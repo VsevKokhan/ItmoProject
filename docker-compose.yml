@@ -22,12 +22,24 @@ services:
       dockerfile: DockerfileBackend  # Путь к Dockerfile, если он называется иначе
     container_name: webapp-container
     restart: always
-    ports:
-      - "5052:5000"
     depends_on:
       - postgres  # Указывает, что контейнер webapp зависит от контейнера postgres
     networks:
       - my_network  # Указываем, что сервис подключается к сети my_network
+
+  nginx:
+    image: nginx:1.21.0
+    container_name: nginx-container
+    restart: always
+    ports:
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro  # Подключаем конфигурацию Nginx
+      - ./certs:/etc/nginx/certs:ro  # SSL-сертификаты
+    depends_on:
+      - webapp
+    networks:
+      - my_network
 
 networks:
   my_network:

@@ -1,6 +1,7 @@
 ﻿using Data;
 using Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Models;
 using Models.DTO;
 using Models.Model;
@@ -21,8 +22,6 @@ public class UserService : IUserService
         {
             Name = user.Name,
             Mail = user.Mail,
-            Itmo_Id = user.Itmo_Id,
-            Itmo_Password = user.Itmo_Password,
             Password_HK = user.Password_HK,
             CreatedAt = DateTime.UtcNow
         };
@@ -31,23 +30,23 @@ public class UserService : IUserService
         foreach (var course in context.Courses.ToList())
         {
             var courseId = course.Id;
-            context.UserCourses.Add(new User_Course() {Course_Id = courseId, User_Id = newUser.Id, Progress = 0});
+            context.UserCourses.Add(new User_Course {Course_Id = courseId, User_Id = newUser.Id});
         }
         foreach (var module in context.Modules)
         {
             var moduleId = module.Id;
-            context.UserModules.Add(new User_Modules() {Module_Id = moduleId, User_Id = newUser.Id});
+            context.UserModules.Add(new User_Modules {Module_Id = moduleId, User_Id = newUser.Id});
         }
         context.SaveChanges();
         return newUser;
     }
     
-    public UserEntity Get(int id)
+    public UserEntity? Get(int id)
     {
-        return context.Users.First(x => x.Id == id);
+        return context.Users.AsNoTracking().FirstOrDefault(x => x.Id == id);
     }
-    public UserEntity Get(string pas, string name)
+    public UserEntity? Get(string pas, string mail)
     {
-        return context.Users.First(x => x.Password_HK == pas && x.Name == name);
+        return context.Users.AsNoTracking().FirstOrDefault(x => x.Password_HK == pas && x.Mail == mail);
     }
 }
