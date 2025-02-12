@@ -13,6 +13,7 @@
 
 Если все ок:
 вводим в пгадмине следующие запросы:
+
 INSERT INTO "Courses" ("Name", "Duration", "Description")
 VALUES
 ('Python', '2024-12-06 12:00:00+00', 'A sample course for testing.');
